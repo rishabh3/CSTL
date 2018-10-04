@@ -1,6 +1,7 @@
 #include "pair.h"
 #include "stack.h"
 #include "list.h"
+#include "vec.h"
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
@@ -180,7 +181,7 @@ int main(){
   for (i = 0; i < vec_int_size(vec); i++) {
     printf("%d\n", vec_int_get(vec, i));
   */
-  return 0;  
+  return 0;
 }
 
 void list_with_ints()

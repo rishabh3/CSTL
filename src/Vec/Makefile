@@ -15,6 +15,7 @@ $(OTDIR)/testexe: $(OTDIR)/vectest.o $(ODIR)/vec.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(ODIR)/vec.o: $(SDIR)/*.c $(SDIR)/*.h
+			(mkdir $(OTDIR));
 			$(CC) -c $(CFLAGS) $< -o $@
 
 $(LODIR)/vec.o: $(SDIR)/*.c $(SDIR)/*.h
@@ -25,4 +26,5 @@ clean:
 			$(RM) bin/* tbin/* $(LODIR)/*
 
 $(OTDIR)/vectest.o: $(TDIR)/*.c
+			(mkdir $(OTDIR));
 			$(CC) -c $(CFLAGS) $^ -o $@

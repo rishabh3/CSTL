@@ -7,24 +7,22 @@ OTDIR = tbin
 TDIR = test
 RM = /bin/rm -rf
 
-all: $(LODIR)/vec.o
+all: $(LODIR)/list.o
 
 test: $(OTDIR)/testexe
 
-$(OTDIR)/testexe: $(OTDIR)/vectest.o $(ODIR)/vec.o
+$(OTDIR)/testexe: $(OTDIR)/listtest.o $(ODIR)/list.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-$(ODIR)/vec.o: $(SDIR)/*.c $(SDIR)/*.h
-			(mkdir $(OTDIR));
+$(ODIR)/list.o: $(SDIR)/*.c $(SDIR)/*.h
 			$(CC) -c $(CFLAGS) $< -o $@
 
-$(LODIR)/vec.o: $(SDIR)/*.c $(SDIR)/*.h
+$(LODIR)/list.o: $(SDIR)/*.c $(SDIR)/*.h
 			$(CC) -c $(CFLAGS) $< -o $@
 .PHONY: clean
 
 clean:
 			$(RM) bin/* tbin/* $(LODIR)/*
 
-$(OTDIR)/vectest.o: $(TDIR)/*.c
-			(mkdir $(OTDIR));
+$(OTDIR)/listtest.o: $(TDIR)/*.c
 			$(CC) -c $(CFLAGS) $^ -o $@

@@ -1,8 +1,8 @@
 
-
+//include this as vec.h
 #include <stdlib.h>
 #include <string.h>
-
+//vectemplate.h
 #ifndef VECTOR_NAME
 #error "Must declare VECTOR_NAME"
 #endif
@@ -27,7 +27,7 @@
 #define VECTOR_DEL     VECTOR_MAKE_STR(del)
 #define VECTOR_SIZE    VECTOR_MAKE_STR(size)
 #define VECTOR_APPEND  VECTOR_MAKE_STR(append)
-
+//vec.c
 typedef struct {
   VECTOR_TYPE *arr;
   size_t size;

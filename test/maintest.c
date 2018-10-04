@@ -157,17 +157,33 @@ int main(){
   /*Test for List ends*/
 
   /*Test for Vector*/
-  PRINT("TEST for vector\n");
-  vector(float) myvec = new_vector(float);
-  for(int i = 0; i < 314; i++)
-  {
-    myvec->append(myvec, i);
-  }
-  for(int i = 0; i < myvec->size(myvec); i++)
-  {
-    printf("%f\n", myvec->get(myvec, i));
-  }
-  free_vector(myvec);
+  vector(abcd) x = new_vector(abcd);
+	vector(fl) y = new_vector(fl);
+	for(int i = 0; i < 14; i++)
+    {
+		x->append(x, 'a'); //append working here
+		y->append(y,'b');
+	}
+	printf("X\n");
+	for(int i = 0; i < x->size(x); i++) //size working here
+    {
+		printf("%c\n", x->get(x, i));//get working here
+		//printf("%d\n", y->get(y, i));
+	}
+	
+	x->pop(x);x->pop(x); //pop works here
+	y->extend(y,x);// extends works here
+	 
+	printf("Y\n");
+	for(int i = 0; i < y->size(y); i++) //size working here
+    {
+		printf("%c\n", y->get(y, i));
+	}
+		
+	printf("curr_size: %u\n", y->size(y)); //size works here
+  printf("maxi_size: %u\n", y->max_size(y)); //max_size works here
+	free_vector(x);// free works here
+  free_vector(y);
   PRINT("SUCCESS! ALL TEST CASE PASSED\n");
   /*Test for Vector Ends*/
   return 0;

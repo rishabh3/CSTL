@@ -1,5 +1,5 @@
 # CSTL
-======
+
 
 This repository is a project on development of C library for standard data structures.
 Run `make all` to create the shared library `libcstl.so`

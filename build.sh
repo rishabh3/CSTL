@@ -1,11 +1,11 @@
 mkdir tbin
 mkdir bin
 cd src
-for d in */ ; do
+for d in ./* ; do
+  [ -d "${d}" ] || continue
   cd $d
   mkdir tbin
   mkdir bin
   cd ..
 done
-make
 export LD_LIBRARY_PATH=~/CSTL/lib:D_LIBRARY_PATH

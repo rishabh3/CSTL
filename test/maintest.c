@@ -158,16 +158,16 @@ int main(){
 
   /*Test for Vector*/
   PRINT("TEST for vector\n");
-  vector(integer) myvec = new_vector(integer);
+  vector(float) myvec = new_vector(float);
   for(int i = 0; i < 314; i++)
   {
-    myvec->append(x, i);
+    myvec->append(myvec, i);
   }
-  for(int i = 0; i < x->size(x); i++)
+  for(int i = 0; i < myvec->size(myvec); i++)
   {
-    printf("%f\n", x->get(x, i));
+    printf("%f\n", myvec->get(myvec, i));
   }
-  free_vector(x);
+  free_vector(myvec);
   PRINT("SUCCESS! ALL TEST CASE PASSED\n");
   /*Test for Vector Ends*/
   return 0;

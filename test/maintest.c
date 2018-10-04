@@ -1,7 +1,7 @@
 #include "pair.h"
 #include "stack.h"
 #include "list.h"
-#include "vec.h"
+
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>

@@ -14,7 +14,7 @@ sub: $(ODIR)/*.o
 test: $(OTDIR)/testexe
 
 $(OTDIR)/testexe: $(OTDIR)/libtest.o $(LDIR)/libcstl.so
-	$(CC) -L$(LDIR) $(CFLAGS) -o $@ $< -lcstl
+	$(CC) -L$(LDIR) $(CFLAGS) -o $@ $< -lcstl;
 	(export LD_LIBRARY_PATH=~/CSTL/lib:$LD_LIBRARY_PATH)
 
 $(ODIR)/*.o:

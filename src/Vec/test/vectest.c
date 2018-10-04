@@ -1,31 +1,21 @@
 #include <stdio.h>
-#define VECTOR_TYPE int
-#define VECTOR_NAME int
+#include <stdlib.h>
 #include "vec.h"
 
-int main(void) {
-  int i;
-  vec_int_t vec;
-  vec_int_init(vec);
-  vec_int_append(vec, 2);
-  vec_int_append(vec, 100);
-  vec_int_append(vec, 101);
-  vec_int_append(vec, 102);
-  vec_int_append(vec, 103);
-  vec_int_append(vec, 104);
-  vec_int_append(vec, 105);
-  vec_int_append(vec, 106);
-  vec_int_append(vec, 107);
-  vec_int_append(vec, 108);
-  vec_int_append(vec, 109);
-  vec_int_pop(vec);
-  vec_int_append(vec, 200);
-  vec_int_pop(vec);
-  vec_int_pop(vec);
-  vec_int_del(vec, 0);
-  vec_int_del(vec, 1);
+initial_vector(float, integer);
 
-  for (i = 0; i < vec_int_size(vec); i++) {
-    printf("%d\n", vec_int_get(vec, i));
-  }
+int main(void)
+{ 
+    vector(integer) x = new_vector(integer);
+
+	 for(int i = 0; i < 314; i++)
+    {
+	x->append(x, i);}
+	 for(int i = 0; i < x->size(x); i++)
+    {
+	printf("%f\n", x->get(x, i));}
+  
+
+    free_vector(x);
+    return 0;
 }

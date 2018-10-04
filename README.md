@@ -11,7 +11,8 @@ Run `make test` to compile test code along with the library
 
 
 Before executing the test executable run the following command
-    export LD_LIBRARY_PATH=path_to_library(.so)_location:D_LIBRARY_PATH
+
+    `export LD_LIBRARY_PATH=path_to_library(.so)_location:D_LIBRARY_PATH`
 
 Run `chmod +x build.sh` to provide execute permission
 

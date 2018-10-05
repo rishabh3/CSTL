@@ -17,4 +17,4 @@ Before executing the test executable run the following command
 Run `chmod +x build.sh` to provide execute permission
 
 
-Run `./build.sh` to build the directory structure and generate the library
+Run `./build.sh` to build the directory structure for the project

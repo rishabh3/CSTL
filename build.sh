@@ -1,5 +1,6 @@
 mkdir tbin
 mkdir bin
+mkdir lib
 cd src
 for d in ./* ; do
   [ -d "${d}" ] || continue

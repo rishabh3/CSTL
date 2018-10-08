@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "vec.h"
-
-initial_vector(char , abcd);
-initial_vector(char, fl)
+#include "../src/vec.h"
 
 int main(void)
 { 
@@ -16,8 +13,8 @@ int main(void)
 		switch(func)
 		{
 		case 1 :
-			vector(abcd) x = new_vector(abcd);
-			vector(fl) y = new_vector(fl);
+			vector(char) x = new_vector(char);
+			vector(char) y = new_vector(char);
 			break;
 		
 		case 2:

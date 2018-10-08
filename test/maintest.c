@@ -221,8 +221,6 @@ void test_list()
 }
 void test_vec()
 {
-  vector(abcd) x = new_vector(abcd);
-  vector(fl) y = new_vector(fl);
   int iterate = 0;
   while(iterate==0)
   {
@@ -232,8 +230,8 @@ void test_vec()
     switch(func)
     {
       case 1 :
-        vector(abcd) x = new_vector(abcd);
-        vector(fl) y = new_vector(fl);
+        vector(char) x = new_vector(char);
+        vector(char) y = new_vector(char);
         break;
       
       case 2:

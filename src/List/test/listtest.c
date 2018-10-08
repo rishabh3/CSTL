@@ -16,10 +16,28 @@ void free_string(void *data);
  
 int main(int argc, char *argv[])
 {
-  printf("Loading demo...\n");
-  list_with_ints();
-  list_with_strings();
-  list_with_floats();
+  printf("Test For List");
+  int iterate = 0;
+  while(iterate==0)
+  {
+    PRINT("1.List With Ints  2.List With Strings  3.List With Floats\n");
+    int func=-1;
+    scanf("%d",&func);
+    switch(func)
+    {
+      case 1:
+        list_with_ints();
+        break;
+      case 2:
+        list_with_strings();
+        break;
+      case 3:
+        list_with_floats();
+        break;
+      default:
+        iterate = 1;
+    }
+  }
 }
  
 void list_with_ints()

@@ -25,167 +25,287 @@ bool iterate_string(void *data);
 bool iterate_float(void *data);
 void free_string(void *data);
 
-
-int main(){
-  /*Test for pair*/
+void test_pair()
+{
   PRINT("TEST for PAIR\n");
-  PRINT("TEST for construction\n");
-  PAIR_int *mypair = make_pair_int(10,20);
-  PAIR_int *myspair = make_pair_int(20, 30);
-  // printf("Before Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
-  PRINT("TEST CASE PASSED!\n");
+  int iterate = 0;
+  while(iterate==0)
+  {
+    PRINT("1.Construction 2.Swap 3.Compare 4. Modification 5.Destruction\n");
+    int func=-1;
+    scanf("%d",&func);
+    switch(func)
+    {
+      case 1 :
+        PRINT("TEST for construction\n");
+        PAIR_int *mypair = make_pair_int(10,20);
+        PAIR_int *myspair = make_pair_int(20, 30);
+        // printf("Before Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for swap\n");
-  assert(get_first_int(mypair) == 10 && get_second_int(mypair) == 20);
-  swap_int(mypair);
-  //printf("After Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
-  assert(get_first_int(mypair) == 20 && get_second_int(mypair) == 10);
-  PRINT("TEST CASE PASSED!\n");
+      case 2:
+        PRINT("TEST for swap\n");
+        assert(get_first_int(mypair) == 10 && get_second_int(mypair) == 20);
+        swap_int(mypair);
+        //printf("After Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
+        assert(get_first_int(mypair) == 20 && get_second_int(mypair) == 10);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for compare\n");
-  assert(compare_int(mypair, myspair) == -1);
-  PRINT("TEST CASE PASSED!\n");
+      case 3:
+        PRINT("TEST for compare\n");
+        assert(compare_int(mypair, myspair) == -1);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for modification\n");
-  modify_pair_int(mypair, 20, 30);
-  assert(get_first_int(mypair) == 20 && get_second_int(mypair) == 30);
-  assert(compare_int(mypair, myspair) == 0);
-  PRINT("TEST CASE PASSED!\n");
+      case 4:
+        PRINT("TEST for modification\n");
+        modify_pair_int(mypair, 20, 30);
+        assert(get_first_int(mypair) == 20 && get_second_int(mypair) == 30);
+        assert(compare_int(mypair, myspair) == 0);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for destruction\n");
-  destroy_pair_int(mypair);
-  destroy_pair_int(myspair);
-  PRINT("TEST CASE PASSED!\n");
+      case 6:
+        PRINT("TEST for destruction\n");
+        destroy_pair_int(mypair);
+        destroy_pair_int(myspair);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
+      default:
+        iterate = 1;
+    }
+  }
   PRINT("SUCCESS! ALL TEST CASES PASSED\n");
-	/*Test for Pair Ends*/
+}
 
-	/*Test for Stack*/
+void test_stack()
+{
   PRINT("TEST for STACK\n");
-  PRINT("TEST for construction\n");
-  Stack *s = createStack(sizeof(float), 3);
-  assert(s);
-  assert(s->memberSize == sizeof(float));
-  assert(s->totalElements == 3);
-  float a=4.1f,b=5.2f,c=7.2f;
-  float d;int r;
-  PRINT("TEST CASE PASSED!\n");
+  int iterate = 0;
+  while(iterate==0)
+  {
+    PRINT("1.Construction 2.Push 3.Pop 4.Top 5.MaxElements 6.Destruction\n");
+    int func=-1;
+    scanf("%d",&func);
+    switch(func)
+    {
+      case 1:
+        PRINT("TEST for construction\n");
+        Stack *s = createStack(sizeof(float), 3);
+        assert(s);
+        assert(s->memberSize == sizeof(float));
+        assert(s->totalElements == 3);
+        float a=4.1f,b=5.2f,c=7.2f;
+        float d;int r;
+        PRINT("TEST CASE PASSED!\n");
+        break;
+      
+      case 2:
+        PRINT("TEST for push\n");
+        r = stackPush(s, (void*)&a);
+        assert(s->top == 0);
+        assert(r == 0);
 
-  PRINT("TEST for push\n");
-  r = stackPush(s, (void*)&a);
-  assert(s->top == 0);
-  assert(r == 0);
+        r = stackPush(s, (void*)&b);
+        assert(s->top == 1);
+        assert(r == 0);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  r = stackPush(s, (void*)&b);
-  assert(s->top == 1);
-  assert(r == 0);
-  PRINT("TEST CASE PASSED!\n");
+      case 3:
+        PRINT("TEST for pop\n");
+        r = stackPop(s, (void*)&d);
+        assert(r == 0);
+        assert(s->top == 0);
+        assert(d == 5.2f);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for pop\n");
-  r = stackPop(s, (void*)&d);
-  assert(r == 0);
-  assert(s->top == 0);
-  assert(d == 5.2f);
-  PRINT("TEST CASE PASSED!\n");
+      case 4:
+        PRINT("TEST for top\n");
+        r = stackTop(s, (void*)&d);
+        assert(r == 0);
+        assert(s->top == 0);
+        assert(d == 4.1f);
 
-  PRINT("TEST for top\n");
-  r = stackTop(s, (void*)&d);
-  assert(r == 0);
-  assert(s->top == 0);
-  assert(d == 4.1f);
+        r = stackPush(s, (void*)&c);
+        assert(s->top == 1);
+        assert(r == 0);
 
-  r = stackPush(s, (void*)&c);
-  assert(s->top == 1);
-  assert(r == 0);
+        r = stackPop(s, (void*)&d);
+        assert(s->top == 0);
+        assert(d == 7.2f);
+        assert(r == 0);
 
-  r = stackPop(s, (void*)&d);
-  assert(s->top == 0);
-  assert(d == 7.2f);
-  assert(r == 0);
+        r = stackPop(s, (void*)&d);
+        assert(s->top == -1);
+        assert(d == 4.1f);
+        assert(r == 0);
 
-  r = stackPop(s, (void*)&d);
-  assert(s->top == -1);
-  assert(d == 4.1f);
-  assert(r == 0);
+        r = stackPop(s, (void*)&d);
+        assert(s->top == -1);
+        assert(r == 1);
 
-  r = stackPop(s, (void*)&d);
-  assert(s->top == -1);
-  assert(r == 1);
+        r = stackTop(s, (void*)&d);
+        assert(s->top == -1);
+        assert(r == 1);
 
-  r = stackTop(s, (void*)&d);
-  assert(s->top == -1);
-  assert(r == 1);
+        r = stackPush(s, (void*)&a);
+        assert(s->top == 0);
+        assert(r == 0);
 
-  r = stackPush(s, (void*)&a);
-  assert(s->top == 0);
-  assert(r == 0);
+        r = stackPush(s, (void*)&b);
+        assert(s->top == 1);
+        assert(r == 0);
 
-  r = stackPush(s, (void*)&b);
-  assert(s->top == 1);
-  assert(r == 0);
+        r =stackPush(s, (void*)&c);
+        assert(s->top == 2);
+        assert(r == 0);
 
-  r =stackPush(s, (void*)&c);
-  assert(s->top == 2);
-  assert(r == 0);
+        r =stackPush(s, (void*)&c);
+        assert(s->top == 3);
+        assert(r == 0);
+        assert(s->totalElements == 6);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  r =stackPush(s, (void*)&c);
-  assert(s->top == 3);
-  assert(r == 0);
-  assert(s->totalElements == 6);
-  PRINT("TEST CASE PASSED!\n");
+      case 5:
+        PRINT("TEST for get max elements\n");
+        r = getMax(s, (void*)&d, intCompare);
+        assert(r == 0);
+        assert(s->top == 3);
+        assert(d == 7.2f);
+        PRINT("TEST CASE PASSED!\n");
+        break;
 
-  PRINT("TEST for get max elements\n");
-  r = getMax(s, (void*)&d, intCompare);
-  assert(r == 0);
-  assert(s->top == 3);
-  assert(d == 7.2f);
-  PRINT("TEST CASE PASSED!\n");
-
-  PRINT("TEST for destruction\n");
-  r = stackDestroy(s);
-  assert(r == 0);
-  PRINT("TEST CASE PASSED!\n");
-
+      case 6:
+        PRINT("TEST for destruction\n");
+        r = stackDestroy(s);
+        assert(r == 0);
+        PRINT("TEST CASE PASSED!\n");
+        break;
+      
+      default:
+        iterate = 1;
+    }
+  }
   PRINT("SUCCESS! ALL TEST CASES PASSED\n");
-  /*Test for Stack Ends*/
-
-  /*Test for List*/
-  list_with_ints();
-  list_with_strings();
-  list_with_floats();
+}
+void test_list()
+{
+  int iterate = 0;
+  while(iterate==0)
+  {
+    PRINT("1.List With Ints  2.List With Strings  3.List With Floats\n");
+    int func=-1;
+    scanf("%d",&func);
+    switch(func)
+    {
+      case 1:
+        list_with_ints();
+        break;
+      case 2:
+        list_with_strings();
+        break;
+      case 3:
+        list_with_floats();
+        break;
+      default:
+        iterate = 1;
+    }
+  }
   PRINT("SUCCESS! ALL TEST CASES PASSED!\n");
-  /*Test for List ends*/
-
-  /*Test for Vector*/
+}
+void test_vec()
+{
   vector(abcd) x = new_vector(abcd);
-	vector(fl) y = new_vector(fl);
-	for(int i = 0; i < 14; i++)
+  vector(fl) y = new_vector(fl);
+  int iterate = 0;
+  while(iterate==0)
+  {
+    PRINT("1.Construction 2.Append 3.Get 4.Pop 5.Extend 6.Current Size 7.Maximum Size 8.Destruction");
+    int func=-1;
+    scanf("%d",&func);
+    switch(func)
     {
-		x->append(x, 'a'); //append working here
-		y->append(y,'b');
-	}
-	printf("X\n");
-	for(int i = 0; i < x->size(x); i++) //size working here
+      case 1 :
+        vector(abcd) x = new_vector(abcd);
+        vector(fl) y = new_vector(fl);
+        break;
+      
+      case 2:
+        for(int i = 0; i < 14; i++)
+        {
+          x->append(x, 'a'); //append working here
+          y->append(y,'b');
+        }
+        printf("X\n");
+        break;
+      
+      case 3:
+        for(int i = 0; i < x->size(x); i++) //size working here
+        {
+          printf("%c\n", x->get(x, i));//get working here
+        }
+        break;
+        
+      case 4:
+        x->pop(x);
+        x->pop(x); //pop works here
+        break;
+      
+      case 5:
+        y->extend(y,x);// extends works here
+        printf("Y\n");
+        for(int i = 0; i < y->size(y); i++) //size working here
+        {
+          printf("%c\n", y->get(y, i));
+        }
+        break;
+          
+      case 6:
+        printf("Current Size: %u\n", y->size(y)); //size works here
+        break;
+
+      case 7:
+        printf("Max Size: %u\n", y->max_size(y)); //max_size works here
+        break;
+      
+      case 8:
+        free_vector(x);// free works here
+        free_vector(y);
+
+      default:
+        iterate = 1;
+    }
+  }
+  printf("ALL TEST CASES WORKING!");
+}
+
+int main()
+{
+  int ds=-1;
+  while(1)
+  {
+    printf("1. Test for Pair/n2.Test for Stack/n3.Test for List\n4.Test for Vector\n9.Exit\n");
+    scanf("%d",&ds);
+    switch(ds)
     {
-		printf("%c\n", x->get(x, i));//get working here
-		//printf("%d\n", y->get(y, i));
-	}
-	
-	x->pop(x);x->pop(x); //pop works here
-	y->extend(y,x);// extends works here
-	 
-	printf("Y\n");
-	for(int i = 0; i < y->size(y); i++) //size working here
-    {
-		printf("%c\n", y->get(y, i));
-	}
-		
-	printf("curr_size: %u\n", y->size(y)); //size works here
-  printf("maxi_size: %u\n", y->max_size(y)); //max_size works here
-	free_vector(x);// free works here
-  free_vector(y);
-  PRINT("SUCCESS! ALL TEST CASE PASSED\n");
-  /*Test for Vector Ends*/
+      case 1 : test_pair();
+                break;
+      case 2 : test_stack();
+              break;
+      case 3 : test_list();
+              break;
+      case 4 : test_vec();
+              break;
+      case 9 : exit(0);
+      default : printf("Invalid Input for Data Structure");
+    }
+  }
   return 0;
 }
 

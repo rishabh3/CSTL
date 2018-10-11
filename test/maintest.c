@@ -27,8 +27,10 @@ void free_string(void *data);
 
 void test_pair()
 {
-  PRINT("TEST for PAIR\n");
+  // PRINT("TEST for PAIR\n");
   int iterate = 0;
+  PAIR_int *mypair = NULL;
+  PAIR_int *myspair = NULL;
   while(iterate==0)
   {
     PRINT("1.Construction 2.Swap 3.Compare 4. Modification 5.Destruction\n");
@@ -38,14 +40,24 @@ void test_pair()
     {
       case 1 :
         PRINT("TEST for construction\n");
-        PAIR_int *mypair = make_pair_int(10,20);
-        PAIR_int *myspair = make_pair_int(20, 30);
+        if(mypair != NULL || myspair != NULL){
+          destroy_pair_int(mypair);
+          mypair = NULL;
+          destroy_pair_int(myspair);
+          myspair = NULL;
+        }
+        mypair = make_pair_int(10,20);
+        myspair = make_pair_int(20, 30);
         // printf("Before Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
         PRINT("TEST CASE PASSED!\n");
         break;
 
       case 2:
         PRINT("TEST for swap\n");
+        if(mypair == NULL || myspair == NULL){
+          PRINT("Error: First Create Pair\n");
+          break;
+        }
         assert(get_first_int(mypair) == 10 && get_second_int(mypair) == 20);
         swap_int(mypair);
         //printf("After Swapping First: %d, Second: %d\n", get_first_int(mypair), get_second_int(mypair));
@@ -55,12 +67,20 @@ void test_pair()
 
       case 3:
         PRINT("TEST for compare\n");
+        if(mypair == NULL || myspair == NULL){
+          PRINT("Error: First Create Pair\n");
+          break;
+        }
         assert(compare_int(mypair, myspair) == -1);
         PRINT("TEST CASE PASSED!\n");
         break;
 
       case 4:
         PRINT("TEST for modification\n");
+        if(mypair == NULL || myspair == NULL){
+          PRINT("Error: First Create Pair\n");
+          break;
+        }
         modify_pair_int(mypair, 20, 30);
         assert(get_first_int(mypair) == 20 && get_second_int(mypair) == 30);
         assert(compare_int(mypair, myspair) == 0);
@@ -69,8 +89,14 @@ void test_pair()
 
       case 6:
         PRINT("TEST for destruction\n");
+        if(mypair == NULL || myspair == NULL){
+          PRINT("Error: First Create Pair\n");
+          break;
+        }
         destroy_pair_int(mypair);
+        mypair = NULL;
         destroy_pair_int(myspair);
+        myspair = NULL;
         PRINT("TEST CASE PASSED!\n");
         break;
 
@@ -85,6 +111,7 @@ void test_stack()
 {
   PRINT("TEST for STACK\n");
   int iterate = 0;
+  Stack *s = NULL;
   while(iterate==0)
   {
     PRINT("1.Construction 2.Push 3.Pop 4.Top 5.MaxElements 6.Destruction\n");
@@ -94,7 +121,11 @@ void test_stack()
     {
       case 1:
         PRINT("TEST for construction\n");
-        Stack *s = createStack(sizeof(float), 3);
+        if(s != NULL){
+          stackDestroy(s);
+          s = NULL;
+        }
+        s = createStack(sizeof(float), 3);
         assert(s);
         assert(s->memberSize == sizeof(float));
         assert(s->totalElements == 3);
@@ -102,9 +133,13 @@ void test_stack()
         float d;int r;
         PRINT("TEST CASE PASSED!\n");
         break;
-      
+
       case 2:
         PRINT("TEST for push\n");
+        if(s == NULL){
+          PRINT("Error: First Create the Stack\n");
+          break;
+        }
         r = stackPush(s, (void*)&a);
         assert(s->top == 0);
         assert(r == 0);
@@ -117,6 +152,10 @@ void test_stack()
 
       case 3:
         PRINT("TEST for pop\n");
+        if(s == NULL){
+          PRINT("Error: First Create the Stack\n");
+          break;
+        }
         r = stackPop(s, (void*)&d);
         assert(r == 0);
         assert(s->top == 0);
@@ -126,6 +165,10 @@ void test_stack()
 
       case 4:
         PRINT("TEST for top\n");
+        if(s == NULL){
+          PRINT("Error: First Create the Stack\n");
+          break;
+        }
         r = stackTop(s, (void*)&d);
         assert(r == 0);
         assert(s->top == 0);
@@ -174,6 +217,10 @@ void test_stack()
 
       case 5:
         PRINT("TEST for get max elements\n");
+        if(s == NULL){
+          PRINT("Error: First Create the Stack\n");
+          break;
+        }
         r = getMax(s, (void*)&d, intCompare);
         assert(r == 0);
         assert(s->top == 3);
@@ -183,11 +230,16 @@ void test_stack()
 
       case 6:
         PRINT("TEST for destruction\n");
+        if(s == NULL){
+          PRINT("Error: First Create the Stack\n");
+          break;
+        }
         r = stackDestroy(s);
+        s = NULL;
         assert(r == 0);
         PRINT("TEST CASE PASSED!\n");
         break;
-      
+
       default:
         iterate = 1;
     }
@@ -222,60 +274,104 @@ void test_list()
 void test_vec()
 {
   int iterate = 0;
+  vector(char) x = NULL;vector(char) y = NULL;
   while(iterate==0)
   {
-    PRINT("1.Construction 2.Append 3.Get 4.Pop 5.Extend 6.Current Size 7.Maximum Size 8.Destruction");
+    PRINT("1.Construction 2.Append 3.Get 4.Pop 5.Extend 6.Current Size 7.Maximum Size 8.Destruction\n");
     int func=-1;
     scanf("%d",&func);
     switch(func)
     {
-      case 1 :
-        vector(char) x = new_vector(char);
-        vector(char) y = new_vector(char);
+      case 1 :PRINT("Test for Vector construction\n");
+        if(x != NULL || y != NULL){
+          free_vector(x);// free works here
+          x = NULL;
+          free_vector(y);
+          y = NULL;
+        }
+        x = new_vector(char);
+        y = new_vector(char);
+        PRINT("Test Case Passed\n");
         break;
-      
-      case 2:
+
+      case 2:PRINT("Test for Vector Append\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         for(int i = 0; i < 14; i++)
         {
           x->append(x, 'a'); //append working here
           y->append(y,'b');
         }
-        printf("X\n");
+        PRINT("Test Case Passed\n");
         break;
-      
-      case 3:
+
+      case 3:PRINT("Test for Vector Get\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         for(int i = 0; i < x->size(x); i++) //size working here
         {
           printf("%c\n", x->get(x, i));//get working here
         }
+        PRINT("Test Case Passed\n");
         break;
-        
-      case 4:
+
+      case 4:PRINT("Test for Vector Pop\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         x->pop(x);
         x->pop(x); //pop works here
+        PRINT("Test Case Passed\n");
         break;
-      
-      case 5:
+
+      case 5:PRINT("Test for Vector Extend\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         y->extend(y,x);// extends works here
         printf("Y\n");
         for(int i = 0; i < y->size(y); i++) //size working here
         {
           printf("%c\n", y->get(y, i));
         }
+        PRINT("Test Case Passed\n");
         break;
-          
-      case 6:
+
+      case 6:PRINT("Test for Vector Size\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         printf("Current Size: %u\n", y->size(y)); //size works here
+        PRINT("Test Case Passed\n");
         break;
 
-      case 7:
+      case 7:PRINT("Test for Vector Capacity\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
         printf("Max Size: %u\n", y->max_size(y)); //max_size works here
+        PRINT("Test Case Passed\n");
         break;
-      
-      case 8:
-        free_vector(x);// free works here
-        free_vector(y);
 
+      case 8:PRINT("Test for Vector Destruction\n");
+        if(x == NULL || y == NULL){
+          PRINT("Error: First Create the Vector\n");
+          break;
+        }
+        free_vector(x);// free works here
+        x = NULL;
+        free_vector(y);
+        y = NULL;
+        PRINT("Test Case Passed\n");
+        break;
       default:
         iterate = 1;
     }
@@ -288,12 +384,12 @@ int main()
   int ds=-1;
   while(1)
   {
-    printf("1. Test for Pair/n2.Test for Stack/n3.Test for List\n4.Test for Vector\n9.Exit\n");
+    printf("1. Test for Pair\n2.Test for Stack\n3.Test for List\n4.Test for Vector\n9.Exit\n");
     scanf("%d",&ds);
     switch(ds)
     {
       case 1 : test_pair();
-                break;
+               break;
       case 2 : test_stack();
               break;
       case 3 : test_list();

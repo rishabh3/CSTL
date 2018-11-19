@@ -1,5 +1,9 @@
 #include "../src/queue.h"
 
+/*
+  Test file to test the basic functionality of the Queue. 
+*/
+
 int main(){
   printf("TEST for QUEUE\n");
   int iterate = 0;
@@ -66,7 +70,7 @@ int main(){
       case 6:
         printf("TEST for destruction\n");
         assert(q != NULL);
-        printQueue(q);
+        // printQueue(q);
         r = queueDestroy(q);
         assert(r == 1);
         printf("TEST CASE PASSED\n");

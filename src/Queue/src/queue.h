@@ -16,4 +16,3 @@ int enqueue(Queue *q, void *data);
 int dequeue(Queue *q, void *target);
 int front(Queue *q, void *target);
 int back(Queue *q, void *target);
-void printQueue(Queue *q);

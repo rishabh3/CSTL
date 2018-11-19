@@ -5,6 +5,7 @@ build:
 			(cd List; make all)
 			(cd Vec; make all)
 			(cd Queue; make all)
+			(cd Deque; make all)
 
 clean:
 			(cd Pair; make clean)
@@ -12,3 +13,4 @@ clean:
 			(cd List; make clean)
 			(cd Vec; make clean)
 			(cd Queue; make clean)
+			(cd Deque; make clean)

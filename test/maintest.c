@@ -2,13 +2,17 @@
 #include "stack.h"
 #include "list.h"
 #include "vec.h"
+#include "deque.h"
 
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define PRINT(x) printf(x)
+#ifndef DEQUE_H
+#define DEQUE_H
 
 int intCompare(const void* a, const void* b) {
   int *ia = (int*)a;
@@ -379,12 +383,82 @@ void test_vec()
   printf("ALL TEST CASES WORKING!");
 }
 
+void test_deque()
+{
+  printf("TEST for DEQUE\n");
+  int iterate = 0;
+  while(iterate == 0){
+    printf("1.Construction 2.Push_front 3.Push_back 4.Pop_front 5.Pop_back 6.Peek_front 7.Peek_back 8.Destruction\n");
+    int func = -1;
+    scanf("%d", &func);
+    switch(func){
+      case 1:
+        printf("TEST for construction\n");//allocate memory
+        deque_type *d = deque_alloc();
+		assert(d != NULL);
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 2:
+        printf("TEST for push_front\n");//add items from front
+        assert(d != NULL);
+        for(int i=1;i<=10;i+=1){
+        	deque_push_front(d, i);
+        }
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 3:
+        printf("TEST for push_back\n");//add items from back
+        assert(d != NULL);
+        for(int i=11;i<=20;i+=1){
+        	deque_push_back(d, i);
+        }
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 4:
+        printf("TEST for pop_front\n");//remove items from front
+        assert(d != NULL);
+		printf("%d\n", deque_pop_front(d));
+        printf("TEST CASE PASSED\n");
+        break;
+      case 5:
+        printf("TEST for pop_back\n");//remove items from back
+        assert(d != NULL);
+		printf("%d\n", deque_pop_back(d));
+	    printf("TEST CASE PASSED\n");
+        break;
+      case 6:
+        printf("TEST for peek_front\n");//peek item from front
+        assert(d != NULL);
+        printf("%d\n",deque_peek_front(d));
+	    printf("TEST CASE PASSED\n");
+        break;
+      case 7:
+        printf("TEST for peek_back\n");//peek item from back
+        assert(d != NULL);
+        printf("%d\n",deque_peek_back(d));
+	    printf("TEST CASE PASSED\n");
+        break;
+      case 8:
+        printf("TEST for destruction\n");//free deque
+        assert(d != NULL);
+        deque_free(d);
+        printf("TEST CASE PASSED\n");
+        break;
+      default:
+        iterate = 1;
+
+    }
+  }
+  printf("SUCCESS! ALL TEST CASES PASSED\n");
+}
+
+
 int main()
 {
   int ds=-1;
   while(1)
   {
-    printf("1. Test for Pair\n2.Test for Stack\n3.Test for List\n4.Test for Vector\n9.Exit\n");
+    printf("1. Test for Pair\n2.Test for Stack\n3.Test for List\n4.Test for Vector\n 7.Test for Deque\n9.Exit\n");
     scanf("%d",&ds);
     switch(ds)
     {
@@ -396,6 +470,8 @@ int main()
               break;
       case 4 : test_vec();
               break;
+      case 7 : test_deque();
+              break;
       case 9 : exit(0);
       default : printf("Invalid Input for Data Structure");
     }
@@ -405,8 +481,6 @@ int main()
 
 void list_with_ints()
 {
-  //int numbers = 10;
- // printf("Generating list with the first %d positive numbers...\n", numbers);
  	PRINT("TEST for int list\n");
   int numbers = 10;
   list list;
@@ -434,11 +508,6 @@ void list_with_strings()
 	PRINT("TEST for string list\n");
   int numNames = 5;
   const char *names[] = { "David", "Kevin", "Michael", "Craig", "Jimi" };
-  /*int numNames;
-  printf("Enter the number of items");
-  scanf("%d",&numNames);
-  const char *elem[] = { "" };
-  printf("Enter the list items");*/
   PRINT("TEST for string list creation\n");
   int i;
   list list;
@@ -446,7 +515,6 @@ void list_with_strings()
 
   char *name;
   for(i = 0; i < numNames; i++) {
-    //scanf("%s",elem[i]);
     name = strdup(names[i]);
     list_append(&list, &name);
   }
@@ -465,11 +533,8 @@ void list_with_strings()
 
 void list_with_floats()
 {
-  //int numbers = 10;
- // printf("Generating list with the first %d positive numbers...\n", numbers);
   PRINT("TEST for float list\n");
   int numbers = 10;
-  //float elem;
   PRINT("TEST for float list creation\n");
   list list;
   list_new(&list, sizeof(float), NULL);
@@ -491,21 +556,18 @@ void list_with_floats()
 
 bool iterate_int(void *data)
 {
-  //printf("Found value: %d\n", *(int *)data);
   printf("%d-> ", *(int *)data);
   return TRUE;
 }
 
 bool iterate_string(void *data)
 {
- // printf("Found string value: %s\n", *(char **)data);
    printf("%s-> ", *(char **)data);
   return TRUE;
 }
 
 bool iterate_float(void *data)
 {
-  //printf("Found value: %d\n", *(int *)data);
   printf("%f-> ", *(float *)data);
   return TRUE;
 }

@@ -3,6 +3,9 @@
 #include "list.h"
 #include "vec.h"
 #include "deque.h"
+#include "queue.h"
+#include "pqueue.h"
+
 
 #include <stdio.h>
 #include <assert.h>
@@ -11,8 +14,6 @@
 #include <stdbool.h>
 
 #define PRINT(x) printf(x)
-#ifndef DEQUE_H
-#define DEQUE_H
 
 int intCompare(const void* a, const void* b) {
   int *ia = (int*)a;
@@ -395,7 +396,7 @@ void test_deque()
       case 1:
         printf("TEST for construction\n");//allocate memory
         deque_type *d = deque_alloc();
-		assert(d != NULL);
+		    assert(d != NULL);
         printf("TEST CASE PASSED!\n");
         break;
       case 2:
@@ -417,26 +418,26 @@ void test_deque()
       case 4:
         printf("TEST for pop_front\n");//remove items from front
         assert(d != NULL);
-		printf("%d\n", deque_pop_front(d));
+		    printf("%d\n", deque_pop_front(d));
         printf("TEST CASE PASSED\n");
         break;
       case 5:
         printf("TEST for pop_back\n");//remove items from back
         assert(d != NULL);
-		printf("%d\n", deque_pop_back(d));
-	    printf("TEST CASE PASSED\n");
+		    printf("%d\n", deque_pop_back(d));
+	      printf("TEST CASE PASSED\n");
         break;
       case 6:
         printf("TEST for peek_front\n");//peek item from front
         assert(d != NULL);
         printf("%d\n",deque_peek_front(d));
-	    printf("TEST CASE PASSED\n");
+	      printf("TEST CASE PASSED\n");
         break;
       case 7:
         printf("TEST for peek_back\n");//peek item from back
         assert(d != NULL);
         printf("%d\n",deque_peek_back(d));
-	    printf("TEST CASE PASSED\n");
+	      printf("TEST CASE PASSED\n");
         break;
       case 8:
         printf("TEST for destruction\n");//free deque
@@ -446,11 +447,130 @@ void test_deque()
         break;
       default:
         iterate = 1;
+    }
+  }
+ printf("SUCCESS! ALL TEST CASES PASSED\n");
+}
+
+void test_queue()
+{
+  printf("TEST for QUEUE\n");
+  int iterate = 0;
+  float a, b, c, d;
+  int r;
+  Queue *q = NULL;
+  while(iterate == 0){
+    printf("1.Construction 2.Enqueue 3.Dequeue 4.Front 5.Back 6.Destruction\n");
+    int func = -1;
+    scanf("%d", &func);
+    switch(func){
+      case 1:
+        printf("TEST for construction\n");
+        q = createQueue(sizeof(float));
+        assert(q);
+        assert(q->elementSize == sizeof(float));
+        assert(q->numElements == 0);
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 2:
+        printf("TEST for enqueue\n");
+        assert(q != NULL);
+        a = 4.1f; b=7.2f; c= 6.1f;
+        r = enqueue(q, (void*)&a);
+        assert(q->numElements == 1);
+        assert(r == 1);
+
+        r = enqueue(q, (void*)&b);
+        assert(q->numElements == 2);
+        assert(r == 1);
+
+        r = enqueue(q, (void*)&c);
+        assert(q->numElements == 3);
+        assert(r == 1);
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 3:
+        printf("TEST for dequeue\n");
+        assert(q != NULL);
+        r = dequeue(q, (void*)&d);
+        assert(r == 1);
+        assert(q->numElements == 2);
+        assert(d == 4.1f);
+        printf("TEST CASE PASSED!\n");
+        break;
+      case 4:
+        printf("TEST for front\n");
+        assert(q != NULL);
+        r = front(q, (void *)&d);
+        assert(r == 1);
+        assert(q->numElements == 2);
+        assert(d == 7.2f);
+        printf("TEST CASE PASSED\n");
+        break;
+      case 5:
+        printf("TEST for back\n");
+        assert(q != NULL);
+        r = back(q, (void *)&d);
+        assert(r == 1);
+        assert(q->numElements == 2);
+        assert(d == 6.1f);
+        printf("TEST CASE PASSED\n");
+        break;
+      case 6:
+        printf("TEST for destruction\n");
+        assert(q != NULL);
+        r = queueDestroy(q);
+        assert(r == 1);
+        printf("TEST CASE PASSED\n");
+        q = NULL;
+        break;
+      default:
+        iterate = 1;
 
     }
   }
   printf("SUCCESS! ALL TEST CASES PASSED\n");
 }
+
+int cmp_floats(const void *val1, const void *val2) {
+    return *(float*) val1 - *(float*) val2;
+}
+
+int cmp_ints(const void *val1, const void *val2)
+{
+	return *(int*) val1 - *(int*) val2;
+}
+
+void test_pqueue(){
+  PQueue* pq = pqueue_new(cmp_floats, 200);
+  PQueue *pq1 = pqueue_new(cmp_ints , 200);
+  float x = 100.0, y = 50.2, z = 300.3, k = 100.9;
+  float w = 1000.0;
+  int a = 10, b= 20, c = 30, d = 40, e = 50;
+
+  pqueue_enqueue(pq, &x);
+  pqueue_enqueue(pq, &y);
+  pqueue_enqueue(pq, &z);
+  pqueue_enqueue(pq, &k);
+  pqueue_enqueue(pq, &w);
+  pqueue_enqueue(pq1, &a);
+  pqueue_enqueue(pq1, &b);
+  pqueue_enqueue(pq1, &c);
+  pqueue_enqueue(pq1, &d);
+  pqueue_enqueue(pq1, &e);
+
+  int i = 0;
+  for(;i<5;++i)
+      printf("%f\n", *(float*) pqueue_dequeue(pq));
+  i = 0;
+  for(;i<5;++i)
+      printf("%d\n", *(int*) pqueue_dequeue(pq1));
+
+  pqueue_delete(pq);
+  pqueue_delete(pq1);
+
+}
+
 
 
 int main()
@@ -459,6 +579,7 @@ int main()
   while(1)
   {
     printf("1. Test for Pair\n2.Test for Stack\n3.Test for List\n4.Test for Vector\n 7.Test for Deque\n9.Exit\n");
+    printf("1. Test for Pair\n2.Test for Stack\n3.Test for List\n4.Test for Vector\n5.Test for Queue\n6.Test for Priority Queue\n9.Exit\n");
     scanf("%d",&ds);
     switch(ds)
     {
@@ -469,6 +590,10 @@ int main()
       case 3 : test_list();
               break;
       case 4 : test_vec();
+              break;
+      case 5 : test_queue();
+              break;
+      case 6: test_pqueue();
               break;
       case 7 : test_deque();
               break;

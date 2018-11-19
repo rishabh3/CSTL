@@ -1,5 +1,6 @@
 #include "../src/stack.h"
 
+#define PRINT printf
 
 int intCompare(const void* a, const void* b) {
   int *ia = (int*)a;
@@ -34,7 +35,7 @@ int main()
         float d;int r;
         PRINT("TEST CASE PASSED!\n");
         break;
-      
+
       case 2:
         PRINT("TEST for push\n");
         r = stackPush(s, (void*)&a);
@@ -119,7 +120,7 @@ int main()
         assert(r == 0);
         PRINT("TEST CASE PASSED!\n");
         break;
-      
+
       default:
         iterate = 1;
     }

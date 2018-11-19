@@ -24,7 +24,19 @@ deque_type * deque_alloc() {
 
 //free the queue
 void deque_free(deque_type *d) {
+	if(deque_is_empty(d)){
+		return ;
+	}
+	struct node_struct *current = d->head;
+	while(current->next != NULL){
+		struct node_struct *next = current->next;
+		free(current);
+		current = next;
+	}
+	d->head = NULL;
+	d->tail = NULL;
 	free(d);
+	d = NULL;
 }
 
 //checking if queue is empty
@@ -97,4 +109,3 @@ deque_val_type deque_peek_front(deque_type *d) {
 deque_val_type deque_peek_back(deque_type *d) {
 	return d->tail->val;
 }
-

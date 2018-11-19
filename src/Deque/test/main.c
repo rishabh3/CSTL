@@ -1,7 +1,9 @@
 #include "../src/deque.h"
+#include <stdio.h>
+#include <assert.h>
 
 /*
-  Test file to test the basic functionality of the Deque. 
+  Test file to test the basic functionality of the Deque.
 */
 
 int main(){
@@ -15,7 +17,7 @@ int main(){
       case 1:
         printf("TEST for construction\n");
         deque_type *d = deque_alloc();
-		assert(d != NULL);
+		    assert(d != NULL);
         printf("TEST CASE PASSED!\n");
         break;
       case 2:

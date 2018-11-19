@@ -5,6 +5,8 @@ build:
 			(cd List; make all)
 			(cd Vec; make all)
 			(cd Queue; make all)
+			(cd PriorityQueue; make all)
+			(cd Set; make all)
 
 clean:
 			(cd Pair; make clean)
@@ -12,3 +14,5 @@ clean:
 			(cd List; make clean)
 			(cd Vec; make clean)
 			(cd Queue; make clean)
+			(cd PriorityQueue; make clean)
+			(cd Set; make clean)
